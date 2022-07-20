@@ -14,7 +14,6 @@ class CityViewModelTests: XCTestCase {
         super.setUp()
     }
     
-    
     func testCityViewModel() throws {
         
         let weatherData = WeatherData(weather: [Weather(id: 1, main: "test main")], main: Main(temp: 29.37, feelsLike: 26.23, humidity: 47), name: "Erzurum")
