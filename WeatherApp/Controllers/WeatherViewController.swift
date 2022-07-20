@@ -11,6 +11,8 @@ class WeatherViewController: UIViewController {
     
     let searchBar = WTextField()
     let searchButton = UIButton(type: .system)
+    let stackView = UIStackView()
+    
     var cityViewModel: CityViewModel!
     
     override func viewDidLoad() {
@@ -30,7 +32,8 @@ extension WeatherViewController {
         view.backgroundColor = .systemBackground
         
         // SearchBar
-        
+        searchBar.font = UIFont.systemFont(ofSize: 24)
+        searchBar.heightAnchor.constraint(equalToConstant: 35).isActive = true
         
         // SearchButton
         searchButton.translatesAutoresizingMaskIntoConstraints = false
@@ -39,23 +42,24 @@ extension WeatherViewController {
         searchButton.configuration?.cornerStyle = .large
         searchButton.addTarget(self, action: #selector(getCityData), for: .touchUpInside)
 //        searchButton.configuration?.showsActivityIndicator = true
+        
+        // StackView
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        stackView.spacing = 10
+        stackView.distribution = .equalSpacing
     }
     
     
     private func layout() {
-        view.addSubview(searchBar)
-        view.addSubview(searchButton)
+        stackView.addArrangedSubview(searchBar)
+        stackView.addArrangedSubview(searchButton)
+        view.addSubview(stackView)
         
         NSLayoutConstraint.activate([
-            searchBar.topAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.topAnchor, multiplier: 1),
-            searchBar.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 1),
-            view.trailingAnchor.constraint(equalToSystemSpacingAfter: searchBar.trailingAnchor, multiplier: 1),
-            searchBar.heightAnchor.constraint(equalToConstant: 45),
-            
-            searchButton.topAnchor.constraint(equalToSystemSpacingBelow: searchBar.bottomAnchor, multiplier: 2),
-            searchButton.leadingAnchor.constraint(equalTo: searchBar.leadingAnchor),
-            searchButton.widthAnchor.constraint(equalTo: searchBar.widthAnchor),
-            searchButton.heightAnchor.constraint(equalToConstant: 45),
+            stackView.topAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.topAnchor, multiplier: 1),
+            stackView.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 1),
+            view.trailingAnchor.constraint(equalToSystemSpacingAfter: stackView.trailingAnchor, multiplier: 1),
         ])
     }
 }
