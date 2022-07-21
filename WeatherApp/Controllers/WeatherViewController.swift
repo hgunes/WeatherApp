@@ -21,6 +21,7 @@ class WeatherViewController: UIViewController {
         
         style()
         layout()
+        setGradientBackground()
     }
     
 }
@@ -50,8 +51,8 @@ extension WeatherViewController {
         stackView.distribution = .equalSpacing
         
         // CurrentDegree
-        currentDegree.font = UIFont.boldSystemFont(ofSize: 45)
-        
+        currentDegree.font = UIFont.boldSystemFont(ofSize: 65)
+        currentDegree.textColor = .systemBlue
     }
     
     
@@ -77,7 +78,7 @@ extension WeatherViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         searchBar.endEditing(true)
         return true
-      }
+    }
 }
 
 // MARK: - Service functions
@@ -101,5 +102,19 @@ extension WeatherViewController {
             }
         }
         
+    }
+}
+
+extension WeatherViewController {
+    private func setGradientBackground() {
+        let colorTop =  UIColor(red: 250.0/255.0, green: 250.0/255.0, blue: 110.0/255.0, alpha: 1.0).cgColor
+        let colorBottom = UIColor(red: 146.0/255.0, green: 220.0/255.0, blue: 126.0/255.0, alpha: 1.0).cgColor
+        
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.colors = [colorTop, colorBottom]
+        gradientLayer.locations = [0.0, 1.0]
+        gradientLayer.frame = self.view.bounds
+        
+        self.view.layer.insertSublayer(gradientLayer, at:0)
     }
 }
